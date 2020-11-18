@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import Reducer from './Modules'
 
-import { Category } from './Containers'
+import { Category, Todo } from './Containers'
 
 const store = createStore(Reducer);
 
@@ -13,6 +13,7 @@ function App () {
 		<Provider store={store}>
 			<h1> APP </h1>
 			<Category />
+			<Todo />
 		</Provider>
 	)
 }

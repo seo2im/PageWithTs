@@ -23,27 +23,27 @@ export const categoryEdit = ({ id , name } : { id : number, name : string }) => 
 	payload : { id, name }
 });
 
-type CategoryAction = 
+type categoryAction = 
 	| ReturnType<typeof categoryAdd>
 	| ReturnType<typeof categoryDel>
 	| ReturnType<typeof categoryEdit>;
 
-export type Category = {
+export type category = {
 	id : number,
 	name : string,
 	TodoList : any [],
 	Records : any []
 };
 
-export type CategoryState = Category[];
+export type categoryState = category[];
 
-const initialState : CategoryState = [];
+const initialState : categoryState = [];
 
-function categoryReducer (state : CategoryState = initialState, action : CategoryAction) {
+function categoryReducer (state : categoryState = initialState, action : categoryAction) {
 	switch (action.type) {
 		case CATEGORY_ADD :
 			return [...state, {
-				id : state.length,
+				id : state.length === 0 ? 0 : state[state.length - 1].id + 1,
 				name : action.payload.name,
 				TodoList : [],
 				Records : []

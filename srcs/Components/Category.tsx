@@ -1,14 +1,14 @@
 import * as React from 'react'
-import { Category } from '../Modules/Category'
+import { category } from '../Modules/Category'
 
 type props = {
-	categories : Category [],
+	categories : category [],
 	add : (name : string) => void,
 	del : (id : number) => void
 	edit : (id : number, name : string) => void;
 }
 
-function Test ({ categories, add, del, edit } : props) {
+function Component ({ categories, add, del, edit } : props) {
 	return (
 		<div>
 			{categories.map(cat => (
@@ -23,4 +23,4 @@ function Test ({ categories, add, del, edit } : props) {
 	)
 }
 
-export default Test;
+export default Component;

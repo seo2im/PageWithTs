@@ -1,14 +1,12 @@
 import * as React from 'react'
-import { Test } from '../Components'
+import { Category } from '../Components'
 import { useSelector ,useDispatch } from 'react-redux'
 import { categoryAdd, categoryDel, categoryEdit } from '../Modules/Category'
 import { State } from '../Modules'
 
-function Category () {
+function Container () {
 	const categories = useSelector((state : State) => state.categories);
 	const distpatch = useDispatch();
-
-	console.log(categories)
 
 	const Add = (name : string) => {
 		distpatch(categoryAdd({ name }));
@@ -24,7 +22,7 @@ function Category () {
 
 	return (
 		<div>
-			<Test categories={categories}
+			<Category categories={categories}
 					add={Add}
 					del={Del}
 					edit={Edit}/>
@@ -32,4 +30,4 @@ function Category () {
 	)
 }
 
-export default Category;
+export default Container;
