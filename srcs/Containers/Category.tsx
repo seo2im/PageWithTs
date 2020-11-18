@@ -1,12 +1,14 @@
-import React from 'react'
-import { Test } from '../Components/index'
+import * as React from 'react'
+import { Test } from '../Components'
 import { useSelector ,useDispatch } from 'react-redux'
 import { categoryAdd, categoryDel, categoryEdit } from '../Modules/Category'
-import { State } from '../Modules/index'
+import { State } from '../Modules'
 
 function Category () {
 	const categories = useSelector((state : State) => state.categories);
 	const distpatch = useDispatch();
+
+	console.log(categories)
 
 	const Add = (name : string) => {
 		distpatch(categoryAdd({ name }));
@@ -21,9 +23,12 @@ function Category () {
 	};
 
 	return (
-		<>
-			<Test categories={categories}/>
-		</>
+		<div>
+			<Test categories={categories}
+					add={Add}
+					del={Del}
+					edit={Edit}/>
+		</div>
 	)
 }
 

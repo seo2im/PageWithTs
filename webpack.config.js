@@ -6,7 +6,11 @@ module.exports = {
 	entry : './srcs/index.tsx',
 	output : {
 		filename : 'bundle.js',
-		path : path.resolve(__dirname, 'dist')
+		path : path.resolve(__dirname, '/dist'),
+		publicPath : '/'
+	},
+	resolve : {
+		extensions : ['.js','.ts', '.tsx']
 	},
 
 	module : {
@@ -17,7 +21,7 @@ module.exports = {
 				use : "babel-loader"
 			},
 			{
-				test : /\.ts(x?)$/,
+				test : /\.tsx?$/,
 				exclude : /node_modules/,
 				use : [
 					{
