@@ -27,8 +27,10 @@ function Container () {
 	}
 
 	return (
-		<Todo todos={todos}
+		<div>
+			<Todo todos={todos}
 				add={Add} del={Del} edit={Edit} done={Done}/>
+		</div>
 	)
 }
 
