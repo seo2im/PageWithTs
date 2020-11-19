@@ -5,9 +5,9 @@ const TODO_DEL = 'todo/DEL' as const;
 const TODO_EDIT = 'todo/EDIT' as const;
 const TODO_DONE = 'todo/DONE' as const;
 
-export const todoAdd = ({ name } : { name : string}) => ({
+export const todoAdd = ({ catId, name } : { catId : number, name : string}) => ({
 	type : TODO_ADD,
-	payload : { name }
+	payload : { catId, name }
 });
 
 export const todoDel = ({ id } : { id : number }) => ({
@@ -32,6 +32,7 @@ type todoAction =
 	| ReturnType<typeof todoDone>;
 
 export type todo = {
+	catId : number,
 	id : number,
 	name : string,
 	state : boolean
@@ -45,6 +46,7 @@ function todoReducer (state : todoState = initState, action : todoAction) {
 	switch (action.type) {
 		case TODO_ADD :
 			return [...state, {
+				catId : action.payload.catId,
 				id : state.length === 0 ? 0 : state[state.length - 1].id + 1,
 				name : action.payload.name,
 				state : false}];

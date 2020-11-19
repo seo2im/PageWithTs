@@ -3,11 +3,11 @@ const RECORD_DEL = 'record/DEL' as const;
 const RECORD_EDIT = 'record/EDIT' as const;
 
 export const recordAdd = 
-({ name, brief, content } :
-{ name : string, brief : string, content : string}) => 
+({ catId, name, brief, content } :
+{ catId : number, name : string, brief : string, content : string}) => 
 ({
 	type : RECORD_ADD,
-	payload : { name, brief, content}
+	payload : { catId, name, brief, content}
 })
 
 export const recordDel = ({ id } : { id : number }) =>
@@ -29,6 +29,7 @@ type recordAction =
 	| ReturnType<typeof recordEdit>
 
 export type record = {
+	catId : number,
 	id : number,
 	date : string,
 	name : string,
@@ -45,6 +46,7 @@ function recordReducer (state : recordState = initState, action : recordAction) 
 		case RECORD_ADD :
 			const date = new Date();
 			return [...state, {
+				catId : action.payload.catId,
 				id : state.length === 0 ? 0 : state[state.length - 1].id + 1,
 				date : `${date.getFullYear() / 100}.${date.getMonth()}.${date.getDate()}`,
 				name : action.payload.name,

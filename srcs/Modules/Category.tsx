@@ -30,9 +30,7 @@ type categoryAction =
 
 export type category = {
 	id : number,
-	name : string,
-	TodoList : any [],
-	Records : any []
+	name : string
 };
 
 export type categoryState = category[];
