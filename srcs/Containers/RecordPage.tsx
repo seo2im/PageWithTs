@@ -4,7 +4,8 @@ import { State } from '../Modules'
 import * as record from '../Modules/Record'
 import { RecordPage } from '../Components'
 
-function Container () {
+function Container ({ match }) {
+	const { catName, recId } = match.params;
 	const records = useSelector((state : State) => state.records)
 	const dispatch = useDispatch();
 
@@ -18,7 +19,7 @@ function Container () {
 
 	return (
 		<RecordPage 
-			catId={0} catName={"cat"} recId={0}
+			catName={catName} recId={0}
 			records={records} recordDel={recordDel} recordEdit={recordEdit}/>
 	)
 }

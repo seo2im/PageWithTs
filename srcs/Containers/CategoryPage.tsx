@@ -6,7 +6,8 @@ import * as todo from '../Modules/Todo'
 import * as record from '../Modules/Record'
 import { CategoryPage } from '../Components'
 
-function Container () {
+function Container ({ match }) {
+	const { catId } = match.params;
 	const { categories, todos, records } = useSelector((state : State) => state);
 	const dispatch = useDispatch();
 
@@ -39,7 +40,7 @@ function Container () {
 	}
 
 	return (
-		<CategoryPage catId={1}
+		<CategoryPage catId={catId}
 			categories={categories} todos={todos} records={records}
 			categoryEdit={categoryEdit} categoryDel={categoryDel}
 			todoAdd={todoAdd} todoEdit={todoEdit} todoDone={todoDone} todoDel={todoDel}

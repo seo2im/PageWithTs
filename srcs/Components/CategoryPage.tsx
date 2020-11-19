@@ -2,6 +2,8 @@ import * as React from 'react'
 import { category } from '../Modules/Category'
 import { record } from '../Modules/Record'
 import { todo } from '../Modules/Todo'
+import Modal from './Modal'
+import CheckModal from './CheckModal'
 
 type props = {
 	catId : number,
@@ -21,16 +23,22 @@ function Component
 ({catId, categories, todos, records,
  categoryEdit, categoryDel, todoAdd, todoEdit, todoDone, recordAdd} : props)
 {
-	const { name : catName } = categories.find(cat => cat.id = catId);
+	const [ visible, setVisible ] = React.useState<boolean>(false);
+	const { name } = categories.find(cat => cat.id = catId);
 	const todoList = todos.filter(todo => todo.catId === catId);
 	const recordList = records.filter(rec => rec.catId === catId);
 
 	return (
 		<div>
-			<h2>Records of {catName}</h2>
-			<button onClick={() => "/* Edit */"}>Edit</button>
+			<h2>Records of {name}</h2>
+			<button onClick={() => {
+				setVisible(true);
+				}}>Edit</button>
 			<div className="Todo">
 				<h3>Todos</h3>
+				<button onClick={() => {
+					setVisible(true);
+					}}>Todo Add</button>
 				<div className="TodoBox">
 					{todoList.filter(todo => !todo.state).map((todo, i) => (
 						<div className="TodoItem" key={i}>
@@ -49,7 +57,7 @@ function Component
 				</div>
 			</div>
 			<div className="Record">
-				<button onClick={() => "/* Add */"}>Add</button>
+				<button onClick={() => "/* Add */"}>Record Add</button>
 				{recordList.map((rec, i) => (
 					<div onClick={() => "/* Link */"} className="RecordBox">
 						<span>{rec.name} {rec.date}</span>
@@ -57,6 +65,7 @@ function Component
 					</div>
 				))}
 			</div>
+			<Modal visible={visible} setVisible={setVisible} func={() => {}}/>
 		</div>
 	)
 }

@@ -1,6 +1,8 @@
 import * as React from 'react'
+import { Link } from 'react-router-dom' 
 import { category } from '../Modules/Category'
 import { todo } from '../Modules/Todo'
+import Modal from './Modal'
 
 type props = {
 	categories : category[];
@@ -9,22 +11,28 @@ type props = {
 }
 
 function Component ({ categories, todos, categoryAdd } : props ) {
+	const [ visible, setVisible ] = React.useState<boolean>(false);
+
 	return (
 		<div>
 			<h1>Record of </h1>
-			<button onClick={() => categoryAdd(name)}>Add</button>
+			<button onClick={() => setVisible(true)}>Add</button>
 			{categories.map((cat, i) => {
 				const todoList = todos.filter(todo => todo.catId === cat.id);
-
-				<div key={i} className="CatBox">
-					<p>{cat.name}</p>
-					{todoList.map((todo, j) => (
-						<div key={`${i}_${j}`} className="todoBox">
-							{todo.name}
+				return (
+					<Link to={`/Category/${cat.id}`}>
+						<div className="CatBox">
+							<p>{cat.name}</p>
+							{todoList.map((todo, j) => (
+								<div className="todoBox">
+									{todo.name}
+								</div>
+							))}
 						</div>
-					))}
-				</div>
+					</Link>
+				)
 			})}
+			<Modal visible={visible} setVisible={setVisible} func={(name) => categoryAdd(name)}/>
 		</div>
 	)
 }

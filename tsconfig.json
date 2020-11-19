@@ -1,6 +1,6 @@
 {
   "include": [
-    "srcs/*", "srcs/Containers/Category.tsx"
+    "srcs/*"
   ],
   "compilerOptions": {
     "target": "es5",

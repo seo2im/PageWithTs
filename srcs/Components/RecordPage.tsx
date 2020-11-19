@@ -2,15 +2,14 @@ import * as React from 'react'
 import { record } from '../Modules/Record'
 
 type props = {
-	catId : number,
 	catName : string,
 	recId : number,
 	records : record [],
-	recordEdit : (id : number) => void,
-	recordDel : (id : number, name : string, brief : string, content : string) => void,
+	recordEdit : (id : number, name : string, brief : string, content : string) => void,
+	recordDel : (id : number) => void
 }
 
-function Component ({catId, catName, recId, records } : props) {
+function Component ({catName, recId, records } : props) {
 	const record = records.find(rec => rec.id === recId)
 
 	return (
