@@ -2,7 +2,7 @@ const RECORD_ADD = 'record/ADD' as const;
 const RECORD_DEL = 'record/DEL' as const;
 const RECORD_EDIT = 'record/EDIT' as const;
 
-export const recordAdd = 
+export const Add = 
 ({ catId, name, brief, content } :
 { catId : number, name : string, brief : string, content : string}) => 
 ({
@@ -10,13 +10,13 @@ export const recordAdd =
 	payload : { catId, name, brief, content}
 })
 
-export const recordDel = ({ id } : { id : number }) =>
+export const Del = ({ id } : { id : number }) =>
 ({
 	type : RECORD_DEL,
 	payload : { id }
 })
 
-export const recordEdit = ({ id, name, brief, content} :
+export const Edit = ({ id, name, brief, content} :
 { id : number, name : string, brief : string, content : string}) =>
 ({
 	type : RECORD_EDIT,
@@ -24,9 +24,9 @@ export const recordEdit = ({ id, name, brief, content} :
 })
 
 type recordAction =
-	| ReturnType<typeof recordAdd>
-	| ReturnType<typeof recordDel>
-	| ReturnType<typeof recordEdit>
+	| ReturnType<typeof Add>
+	| ReturnType<typeof Del>
+	| ReturnType<typeof Edit>
 
 export type record = {
 	catId : number,

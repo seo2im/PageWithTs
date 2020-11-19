@@ -8,7 +8,7 @@ type props = {
 	categoryAdd : (name) => void
 }
 
-function MainPage ({ categories, todos, categoryAdd } : props ) {
+function Component ({ categories, todos, categoryAdd } : props ) {
 	return (
 		<div>
 			<h1>Record of </h1>
@@ -29,4 +29,4 @@ function MainPage ({ categories, todos, categoryAdd } : props ) {
 	)
 }
 
-export default MainPage;
+export default Component;

@@ -13,11 +13,11 @@ type props = {
 	todoAdd : (catId : number, name :string) => void,
 	todoEdit : (id : number, name : string) => void,
 	todoDone : (id : number) => void,
-	todoDel : () => void,
-	recordAdd : () => void,
+	todoDel : (id : number) => void,
+	recordAdd : (catId : number, name : string, brief : string, content : string) => void,
 }
 
-function CategoryPage
+function Component
 ({catId, categories, todos, records,
  categoryEdit, categoryDel, todoAdd, todoEdit, todoDone, recordAdd} : props)
 {
@@ -61,4 +61,4 @@ function CategoryPage
 	)
 }
 
-export default CategoryPage;
+export default Component;

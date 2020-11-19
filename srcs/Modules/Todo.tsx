@@ -5,31 +5,31 @@ const TODO_DEL = 'todo/DEL' as const;
 const TODO_EDIT = 'todo/EDIT' as const;
 const TODO_DONE = 'todo/DONE' as const;
 
-export const todoAdd = ({ catId, name } : { catId : number, name : string}) => ({
+export const Add = ({ catId, name } : { catId : number, name : string}) => ({
 	type : TODO_ADD,
 	payload : { catId, name }
 });
 
-export const todoDel = ({ id } : { id : number }) => ({
+export const Del = ({ id } : { id : number }) => ({
 	type : TODO_DEL,
 	payload : { id }
 });
 
-export const todoEdit = ({ id, name } : { id : number, name : string }) => ({
+export const Edit = ({ id, name } : { id : number, name : string }) => ({
 	type : TODO_EDIT,
 	payload : { id, name }
 });
 
-export const todoDone = ({ id } : { id : number}) => ({
+export const Done = ({ id } : { id : number}) => ({
 	type : TODO_DONE,
 	payload : { id }
 });
 
 type todoAction = 
-	| ReturnType<typeof todoAdd>
-	| ReturnType<typeof todoDel>
-	| ReturnType<typeof todoEdit>
-	| ReturnType<typeof todoDone>;
+	| ReturnType<typeof Add>
+	| ReturnType<typeof Del>
+	| ReturnType<typeof Edit>
+	| ReturnType<typeof Done>;
 
 export type todo = {
 	catId : number,

@@ -6,9 +6,11 @@ type props = {
 	catName : string,
 	recId : number,
 	records : record [],
+	recordEdit : (id : number) => void,
+	recordDel : (id : number, name : string, brief : string, content : string) => void,
 }
 
-function RecordPage ({catId, catName, recId, records } : props) {
+function Component ({catId, catName, recId, records } : props) {
 	const record = records.find(rec => rec.id === recId)
 
 	return (
@@ -25,4 +27,4 @@ function RecordPage ({catId, catName, recId, records } : props) {
 	)
 }
 
-export default RecordPage;
+export default Component;

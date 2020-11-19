@@ -1,3 +1,3 @@
-export { default as Category } from './Category'
-export { default as Todo } from './Todo'
-export { default as Record } from './Record'
+export { default as MainPage } from './MainPage'
+export { default as CategoryPage } from './CategoryPage'
+export { default as RecordPage } from './RecordPage'

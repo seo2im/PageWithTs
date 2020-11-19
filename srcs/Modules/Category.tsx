@@ -8,25 +8,25 @@ const CATEGORY_ADD = 'category/ADD' as const;
 const CATEGORY_DEL = 'category/DEL' as const;
 const CATEGORY_EDIT = 'category/EDIT' as const;
 
-export const categoryAdd = ({ name } : { name : string }) => ({
+export const Add = ({ name } : { name : string }) => ({
 	type : CATEGORY_ADD,
 	payload : { name }
 });
 
-export const categoryDel = ({ id } : { id : number }) => ({
+export const Del = ({ id } : { id : number }) => ({
 	type : CATEGORY_DEL,
 	payload : { id }
 });
 
-export const categoryEdit = ({ id , name } : { id : number, name : string }) => ({
+export const Edit = ({ id , name } : { id : number, name : string }) => ({
 	type : CATEGORY_EDIT,
 	payload : { id, name }
 });
 
 type categoryAction = 
-	| ReturnType<typeof categoryAdd>
-	| ReturnType<typeof categoryDel>
-	| ReturnType<typeof categoryEdit>;
+	| ReturnType<typeof Add>
+	| ReturnType<typeof Del>
+	| ReturnType<typeof Edit>;
 
 export type category = {
 	id : number,
