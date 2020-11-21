@@ -3,11 +3,11 @@ const RECORD_DEL = 'record/DEL' as const;
 const RECORD_EDIT = 'record/EDIT' as const;
 
 export const Add = 
-({ catId, name, brief, content } :
-{ catId : number, name : string, brief : string, content : string}) => 
+({ catId, name, content } :
+{ catId : number, name : string, content : string}) => 
 ({
 	type : RECORD_ADD,
-	payload : { catId, name, brief, content}
+	payload : { catId, name, content}
 })
 
 export const Del = ({ id } : { id : number }) =>
@@ -33,7 +33,6 @@ export type record = {
 	id : number,
 	date : string,
 	name : string,
-	brief : string,
 	content : string
 };
 
@@ -50,7 +49,6 @@ function recordReducer (state : recordState = initState, action : recordAction) 
 				id : state.length === 0 ? 0 : state[state.length - 1].id + 1,
 				date : `${date.getFullYear() / 100}.${date.getMonth()}.${date.getDate()}`,
 				name : action.payload.name,
-				brief : action.payload.brief,
 				content : action.payload.content
 			}]
 		

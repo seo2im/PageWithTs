@@ -35,8 +35,8 @@ function Container ({ match }) {
 		dispatch(todo.Del({ id }));
 	}
 
-	const recordAdd = (catId : number, name : string, brief : string, content : string) => {
-		dispatch(record.Add({ catId, name, brief, content }));
+	const recordAdd = (catId : number, name : string, content : string) => {
+		dispatch(record.Add({ catId, name, content }));
 	}
 
 	return (

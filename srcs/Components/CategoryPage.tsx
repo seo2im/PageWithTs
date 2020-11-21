@@ -1,9 +1,15 @@
 import * as React from 'react'
+import { Link } from 'react-router-dom'
 import { category } from '../Modules/Category'
 import { record } from '../Modules/Record'
 import { todo } from '../Modules/Todo'
-import Modal from './Modal'
-import CheckModal from './CheckModal'
+import { Visible } from '../Types'
+
+import EditModal from './Modal/EditModal'
+import AddModal from './Modal/AddModal'
+import DelModal from './Modal/DelModal'
+import DoneModal from './Modal/DoneModal'
+
 
 type props = {
 	catId : number,
@@ -19,53 +25,68 @@ type props = {
 	recordAdd : (catId : number, name : string, brief : string, content : string) => void,
 }
 
+/*
+
+*/
+
 function Component
 ({catId, categories, todos, records,
- categoryEdit, categoryDel, todoAdd, todoEdit, todoDone, recordAdd} : props)
+ categoryEdit, categoryDel, todoAdd, todoEdit, todoDone, todoDel, recordAdd} : props)
 {
-	const [ visible, setVisible ] = React.useState<boolean>(false);
+	const [ add, setAdd ] = React.useState<{}>({visible : Visible.NONE, func : () => {}, catId : -1})
+	const [ edit, setEdit ] = React.useState<{}>({visible : Visible.NONE, id : -1, func : () => {}})
+	const [ del, setDel ] = React.useState<{}>({visible : Visible.NONE, id : -1, func : () => {}})
+	const [ done, setDone ] = React.useState<{}>({visible : Visible.NONE, id : -1, func : () => {}})
 	const { name } = categories.find(cat => cat.id = catId);
 	const todoList = todos.filter(todo => todo.catId === catId);
 	const recordList = records.filter(rec => rec.catId === catId);
+
+	console.log(todos);
 
 	return (
 		<div>
 			<h2>Records of {name}</h2>
 			<button onClick={() => {
-				setVisible(true);
+				setEdit({visible : Visible.EDIT, id : catId, func : categoryEdit})
 				}}>Edit</button>
 			<div className="Todo">
 				<h3>Todos</h3>
 				<button onClick={() => {
-					setVisible(true);
+					setAdd({visible : Visible.ADD, func : todoAdd, catId : catId})
 					}}>Todo Add</button>
 				<div className="TodoBox">
-					{todoList.filter(todo => !todo.state).map((todo, i) => (
+					{todoList.filter(todo => todo.state === false).map((todo, i) => (
 						<div className="TodoItem" key={i}>
-							<p onClick={() => "/* Edit */"}>{todo.name}</p> 
-							<button onClick={() => "/* Del */"}>Del</button>
-							<button onClick={() => "/* Done */"}>Done</button>
+							<p onClick={() => {
+								setEdit({visible : Visible.EDIT, id : todo.id, func : todoEdit})
+							}}>{todo.name}</p> 
+							<button onClick={() => setDel({visible : Visible.DEL, id : todo.id, func : todoDel})}>Del</button>
+							<button onClick={() => setDone({visible : Visible.DONE, id : todo.id, func : todoDone})}>Done</button>
 						</div>
 					))}
 				</div>
 				<div className="TodoBox">
 					{todoList.filter(todo => todo.state).map((todo, i) => (
 						<div className="TodoItem" key={i}>
-							<p onClick={() => "/* Edit */"}>{todo.name}</p> 
+							<p onClick={() => setEdit({visible : Visible.EDIT, id : todo.id, func : todoEdit})}>{todo.name}</p> 
 						</div>
 					))}
 				</div>
 			</div>
 			<div className="Record">
-				<button onClick={() => "/* Add */"}>Record Add</button>
+				<button onClick={() => setAdd({visible : Visible.RECORD_ADD, func : recordAdd, catId : catId})}>Record Add</button>
 				{recordList.map((rec, i) => (
-					<div onClick={() => "/* Link */"} className="RecordBox">
-						<span>{rec.name} {rec.date}</span>
-						<p>{rec.brief}</p>
-					</div>
+					<Link to={`/Record/${name}/${rec.id}`}>
+						<div onClick={() => "/* Link */"} className="RecordBox">
+							<span>{rec.name} {rec.date}</span>
+						</div>
+					</Link>
 				))}
 			</div>
-			<Modal visible={visible} setVisible={setVisible} func={() => {}}/>
+			<EditModal edit={edit} setEdit={setEdit}/>
+			<AddModal add={add} setAdd={setAdd}/>
+			<DelModal del={del} setDel={setDel} history={null}/>
+			<DoneModal done={done} setDone={setDone}/>
 		</div>
 	)
 }

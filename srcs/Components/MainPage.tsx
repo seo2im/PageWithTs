@@ -2,7 +2,9 @@ import * as React from 'react'
 import { Link } from 'react-router-dom' 
 import { category } from '../Modules/Category'
 import { todo } from '../Modules/Todo'
-import Modal from './Modal'
+import { Visible } from '../Types' 
+import AddModal from './Modal/AddModal'
+import { useSelector } from 'react-redux'
 
 type props = {
 	categories : category[];
@@ -11,12 +13,14 @@ type props = {
 }
 
 function Component ({ categories, todos, categoryAdd } : props ) {
-	const [ visible, setVisible ] = React.useState<boolean>(false);
+	const [ add, setAdd ] = React.useState<{}>({visible : Visible.NONE, func : () => {}});
+
+	console.log(categories)
 
 	return (
 		<div>
 			<h1>Record of </h1>
-			<button onClick={() => setVisible(true)}>Add</button>
+			<button onClick={() => setAdd({visible : Visible.ADD, func : categoryAdd})}>Add</button>
 			{categories.map((cat, i) => {
 				const todoList = todos.filter(todo => todo.catId === cat.id);
 				return (
@@ -32,7 +36,7 @@ function Component ({ categories, todos, categoryAdd } : props ) {
 					</Link>
 				)
 			})}
-			<Modal visible={visible} setVisible={setVisible} func={(name) => categoryAdd(name)}/>
+			<AddModal add={add} setAdd={setAdd} />
 		</div>
 	)
 }
