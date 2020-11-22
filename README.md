@@ -23,3 +23,8 @@ setFunc('/* some function */')
 
 console.log(func) /* undefined */
 ```
+
+4. Horizontal Style Basic
+Layout made with `float`
+Each box made with `flex display`
+
