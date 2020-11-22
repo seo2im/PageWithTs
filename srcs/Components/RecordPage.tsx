@@ -5,6 +5,8 @@ import { record } from '../Modules/Record'
 import EditModal from './Modal/EditModal'
 import DelModal from './Modal/DelModal' 
 
+import * as styled from '../Styles/RecordPage'
+
 type props = {
 	catName : string,
 	recId : number,
@@ -20,17 +22,20 @@ function Component ({catName, recId, records, recordEdit, recordDel, history } :
 	const [ del, setDel ] = React.useState<{}>({});
 
 	return (
-		<div>
-			<h2>Record of {catName}</h2>
-			<div className="Record">
-				<span>{record.name} {record.date}</span>
-				<button onClick={() => setEdit({visible : Visible.RECORD_EDIT, id : record.id, func : recordEdit})}>Edit</button>
-				<button onClick={() => setDel({visible : Visible.DEL, id : record.id, func : recordDel, back : true})}>Del</button>
-				<p>{record.content}</p>
-			</div>
+		<styled.Div>
+			<styled.Title>Record of {catName}</styled.Title>
+			<styled.Head>
+				<styled.RecordTitle>{record.name}</styled.RecordTitle>
+				<styled.Date>{record.date}</styled.Date>
+				<styled.Button onClick={() => setEdit({visible : Visible.RECORD_EDIT, id : record.id, func : recordEdit})}>Edit</styled.Button>
+				<styled.Button onClick={() => setDel({visible : Visible.DEL, id : record.id, func : recordDel, back : true})}>Del</styled.Button>
+			</styled.Head>
+
+			<styled.Content>{record.content}</styled.Content>
+
 			<EditModal edit={edit} setEdit={setEdit} />
 			<DelModal del={del} setDel={setDel} history={history}/>
-		</div>
+		</styled.Div>
 	)
 }
 

@@ -40,16 +40,29 @@ export type todo = {
 
 export type todoState = todo [];
 
-const initState : todoState = [];
+const initState : todoState = [{
+	catId : 0, id : 0, name : "testTodo1",  state : false
+},{
+	catId : 0, id : 1, name : "testTodo2",  state : false
+},{
+	catId : 0, id : 2, name : "testTodo3",  state : false
+},{
+	catId : 1, id : 3, name : "testTodo4",  state : false
+},{
+	catId : 1, id : 4, name : "testTodo5",  state : false
+},{
+	catId : 1, id : 5, name : "testTodo6",  state : false
+}];
 
 function todoReducer (state : todoState = initState, action : todoAction) {
 	switch (action.type) {
 		case TODO_ADD :
-			return [...state, {
+			console.log("add", action.payload);
+			return [{
 				catId : action.payload.catId,
 				id : state.length === 0 ? 0 : state[state.length - 1].id + 1,
 				name : action.payload.name,
-				state : false}];
+				state : false}, ...state];
 
 		case TODO_DEL :
 			return state.filter(todo => todo.id !== action.payload.id);

@@ -7,7 +7,7 @@ import { MainPage } from '../Components'
 function Container () {
 	const { categories, todos } = useSelector((state : State) => state);
 	const dispatch = useDispatch();
-	
+
 	const categoryAdd = (name : string) => {
 		dispatch(category.Add({ name }));
 	}

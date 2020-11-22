@@ -35,7 +35,11 @@ export type category = {
 
 export type categoryState = category[];
 
-const initialState : categoryState = [];
+const initialState : categoryState = [{
+	id : 0, name : "TestCat"
+}, {
+	id : 1, name : "TestCat2"
+}];
 
 function categoryReducer (state : categoryState = initialState, action : categoryAction) {
 	switch (action.type) {
@@ -43,8 +47,6 @@ function categoryReducer (state : categoryState = initialState, action : categor
 			return [...state, {
 				id : state.length === 0 ? 0 : state[state.length - 1].id + 1,
 				name : action.payload.name,
-				TodoList : [],
-				Records : []
 			}];
 		
 		case CATEGORY_DEL :

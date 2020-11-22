@@ -19,7 +19,7 @@ function Container ({ match, history }) {
 
 	return (
 		<RecordPage 
-			catName={catName} recId={0}
+			catName={catName} recId={Number(recId)}
 			records={records} recordDel={recordDel} recordEdit={recordEdit}
 			history={history}/>
 	)

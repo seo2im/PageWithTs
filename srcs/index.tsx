@@ -1,12 +1,13 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import Reducer from './Modules'
 
-
 import { MainPage, CategoryPage, RecordPage } from './Containers'
-import { BrowserRouter, Route } from 'react-router-dom'
+
+import { GrobalStyle } from './Styles/Basic'
 
 const store = createStore(Reducer);
 
@@ -23,6 +24,7 @@ function Root () {
 function App () {
 	return (
 		<Provider store={store}>
+			<GrobalStyle />
 			<Root />
 		</Provider>
 	)

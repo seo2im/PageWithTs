@@ -6,6 +6,8 @@ import { Visible } from '../Types'
 import AddModal from './Modal/AddModal'
 import { useSelector } from 'react-redux'
 
+import * as styled from '../Styles/MainPage'
+
 type props = {
 	categories : category[];
 	todos : todo[];
@@ -15,29 +17,30 @@ type props = {
 function Component ({ categories, todos, categoryAdd } : props ) {
 	const [ add, setAdd ] = React.useState<{}>({visible : Visible.NONE, func : () => {}});
 
-	console.log(categories)
-
 	return (
-		<div>
-			<h1>Record of </h1>
-			<button onClick={() => setAdd({visible : Visible.ADD, func : categoryAdd})}>Add</button>
+		<styled.Div>
+			<styled.Title>
+				Record of 
+				<styled.Button onClick={() => setAdd({visible : Visible.ADD, func : categoryAdd})}>Add</styled.Button>
+			</styled.Title>
 			{categories.map((cat, i) => {
 				const todoList = todos.filter(todo => todo.catId === cat.id);
+				const { id, name } = cat;
 				return (
-					<Link to={`/Category/${cat.id}`}>
-						<div className="CatBox">
-							<p>{cat.name}</p>
-							{todoList.map((todo, j) => (
-								<div className="todoBox">
-									{todo.name}
-								</div>
-							))}
-						</div>
-					</Link>
+					<styled.CatDiv>
+						<styled.Link to={`/Category/${id}`}>
+							<styled.Cat>{name}</styled.Cat>
+						</styled.Link>
+						<styled.TodoBox>
+						{todoList.map((todo, j) => (
+							<styled.Todo>{todo.name}</styled.Todo>
+						))}
+						</styled.TodoBox>
+					</styled.CatDiv>
 				)
 			})}
 			<AddModal add={add} setAdd={setAdd} />
-		</div>
+		</styled.Div>
 	)
 }
 

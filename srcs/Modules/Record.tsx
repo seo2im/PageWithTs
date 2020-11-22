@@ -38,19 +38,39 @@ export type record = {
 
 type recordState = record[];
 
-const initState : recordState = [];
+const initState : recordState = [{
+	catId : 0,
+	id : 0,
+	date : '20.11.12',
+	name : 'Test Record1',
+	content : 'TestTestTest'
+},
+{
+	catId : 0,
+	id : 1,
+	date : '20.11.13',
+	name : 'Test Record1',
+	content : 'TestTestTest'
+},
+{
+	catId : 0,
+	id : 2,
+	date : '20.11.14',
+	name : 'Test Record1',
+	content : 'TestTestTest'
+}];
 
 function recordReducer (state : recordState = initState, action : recordAction) {
 	switch (action.type) {
 		case RECORD_ADD :
 			const date = new Date();
-			return [...state, {
+			return [{
 				catId : action.payload.catId,
 				id : state.length === 0 ? 0 : state[state.length - 1].id + 1,
-				date : `${date.getFullYear() / 100}.${date.getMonth()}.${date.getDate()}`,
+				date : `${date.getFullYear() % 100}.${date.getMonth()}.${date.getDate()}`,
 				name : action.payload.name,
 				content : action.payload.content
-			}]
+			}, ...state]
 		
 		case RECORD_DEL :
 			return state.filter(rec => rec.id !== action.payload.id)

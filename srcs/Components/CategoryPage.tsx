@@ -10,6 +10,7 @@ import AddModal from './Modal/AddModal'
 import DelModal from './Modal/DelModal'
 import DoneModal from './Modal/DoneModal'
 
+import * as styled from '../Styles/CategoryPage'
 
 type props = {
 	catId : number,
@@ -25,10 +26,6 @@ type props = {
 	recordAdd : (catId : number, name : string, brief : string, content : string) => void,
 }
 
-/*
-
-*/
-
 function Component
 ({catId, categories, todos, records,
  categoryEdit, categoryDel, todoAdd, todoEdit, todoDone, todoDel, recordAdd} : props)
@@ -37,57 +34,66 @@ function Component
 	const [ edit, setEdit ] = React.useState<{}>({visible : Visible.NONE, id : -1, func : () => {}})
 	const [ del, setDel ] = React.useState<{}>({visible : Visible.NONE, id : -1, func : () => {}})
 	const [ done, setDone ] = React.useState<{}>({visible : Visible.NONE, id : -1, func : () => {}})
-	const { name } = categories.find(cat => cat.id = catId);
+	const { name } = categories.find(cat => cat.id == catId);
 	const todoList = todos.filter(todo => todo.catId === catId);
 	const recordList = records.filter(rec => rec.catId === catId);
 
-	console.log(todos);
-
 	return (
-		<div>
-			<h2>Records of {name}</h2>
-			<button onClick={() => {
-				setEdit({visible : Visible.EDIT, id : catId, func : categoryEdit})
-				}}>Edit</button>
-			<div className="Todo">
-				<h3>Todos</h3>
-				<button onClick={() => {
-					setAdd({visible : Visible.ADD, func : todoAdd, catId : catId})
-					}}>Todo Add</button>
-				<div className="TodoBox">
+		<styled.Div>
+			<styled.Title>
+				Records of {name}
+				<styled.Button onClick={() => {
+					setEdit({visible : Visible.EDIT, id : catId, func : categoryEdit})
+					}}>Edit</styled.Button>
+			</styled.Title>
+
+			<styled.TodoDiv>
+				<styled.Todo>
+					<styled.TodoItem>
+					Todos
+					<styled.Button onClick={() => {
+						setAdd({visible : Visible.ADD, func : todoAdd, catId : catId})
+						}}>Todo Add</styled.Button>
+					</styled.TodoItem>
+				<styled.TodoBox>
 					{todoList.filter(todo => todo.state === false).map((todo, i) => (
-						<div className="TodoItem" key={i}>
+						<styled.TodoItem key={i}>
 							<p onClick={() => {
 								setEdit({visible : Visible.EDIT, id : todo.id, func : todoEdit})
 							}}>{todo.name}</p> 
 							<button onClick={() => setDel({visible : Visible.DEL, id : todo.id, func : todoDel})}>Del</button>
 							<button onClick={() => setDone({visible : Visible.DONE, id : todo.id, func : todoDone})}>Done</button>
-						</div>
+						</styled.TodoItem>
 					))}
-				</div>
-				<div className="TodoBox">
+				</styled.TodoBox>
+				</styled.Todo>
+				<styled.Todo>Done
+				<styled.TodoBox>
 					{todoList.filter(todo => todo.state).map((todo, i) => (
-						<div className="TodoItem" key={i}>
+						<styled.TodoItem key={i}>
 							<p onClick={() => setEdit({visible : Visible.EDIT, id : todo.id, func : todoEdit})}>{todo.name}</p> 
-						</div>
+						</styled.TodoItem>
 					))}
-				</div>
-			</div>
-			<div className="Record">
-				<button onClick={() => setAdd({visible : Visible.RECORD_ADD, func : recordAdd, catId : catId})}>Record Add</button>
+				</styled.TodoBox>
+				</styled.Todo>
+			</styled.TodoDiv>
+
+			<styled.RecordDiv>
+				Records<styled.Button onClick={() => setAdd({visible : Visible.RECORD_ADD, func : recordAdd, catId : catId})}>Record Add</styled.Button>
 				{recordList.map((rec, i) => (
-					<Link to={`/Record/${name}/${rec.id}`}>
-						<div onClick={() => "/* Link */"} className="RecordBox">
-							<span>{rec.name} {rec.date}</span>
-						</div>
-					</Link>
+					<styled.Link to={`/Record/${name}/${rec.id}`}>
+						<styled.RecordItem>
+							<styled.RecrodName>{rec.name}</styled.RecrodName><styled.Date>{rec.date}</styled.Date>
+						</styled.RecordItem>
+					</styled.Link>
 				))}
-			</div>
+			</styled.RecordDiv>
+
 			<EditModal edit={edit} setEdit={setEdit}/>
 			<AddModal add={add} setAdd={setAdd}/>
 			<DelModal del={del} setDel={setDel} history={null}/>
 			<DoneModal done={done} setDone={setDone}/>
-		</div>
+		</styled.Div>
 	)
 }
 

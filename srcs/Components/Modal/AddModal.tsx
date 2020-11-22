@@ -4,10 +4,9 @@ import { Visible } from '../../Types'
 function Modal ({add, setAdd}) {
 	const { visible, func, catId } = add;
 	let value;
-	
-	const D = new Date();
-	const date = `${D.getFullYear()/100}.${D.getMonth()}.${D.getDate()}`;
 	let content;
+
+	console.log(catId);
 
 	return (
 		<div style={{display : (visible === Visible.ADD) || (visible === Visible.RECORD_ADD) ? "block" : "none",
@@ -28,7 +27,7 @@ function Modal ({add, setAdd}) {
 				</form>
 				: null}
 				<button onClick={() => {
-					catId ?
+					catId !== undefined ?
 					(visible === Visible.RECORD_ADD ? func(catId, value, content) : func(catId, value)) : 
 					func(value);
 					setAdd({ visible : Visible.NONE, func : () => {}, catId : -1})

@@ -11,6 +11,8 @@ function Container ({ match }) {
 	const { categories, todos, records } = useSelector((state : State) => state);
 	const dispatch = useDispatch();
 
+	console.log(categories);
+
 	const categoryEdit = (id : number, name : string) => {
 		dispatch(category.Edit({ id, name }));
 	}
@@ -40,7 +42,7 @@ function Container ({ match }) {
 	}
 
 	return (
-		<CategoryPage catId={catId}
+		<CategoryPage catId={Number(catId)}
 			categories={categories} todos={todos} records={records}
 			categoryEdit={categoryEdit} categoryDel={categoryDel}
 			todoAdd={todoAdd} todoEdit={todoEdit} todoDone={todoDone} todoDel={todoDel}
