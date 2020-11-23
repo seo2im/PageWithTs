@@ -1,0 +1,31 @@
+import * as React from 'react'
+
+import * as styled from '../../Styles/CategoryPage'
+import { Visible } from '../../Types/ModalVisible'
+
+function Todo ({ kind, todos, func, todoFunc}) {
+	const { setEdit, setDel, setDone } = func;
+	const { todoEdit, todoDel, todoDone } = todoFunc;
+
+	return (
+		<styled.Todo>{kind}
+			<styled.TodoBox>
+				{todos.filter(todo => todo.state === false).map((todo, i) => (
+						<styled.TodoItem key={i}>
+							<p onClick={() => {
+								setEdit({visible : Visible.EDIT, id : todo.id, func : todoEdit})
+							}}>{todo.name}</p> 
+							{kind === "Todo" ? 
+							<div>
+								<button onClick={() => setDel({visible : Visible.DEL, id : todo.id, func : todoDel})}>Del</button>
+								<button onClick={() => setDone({visible : Visible.DONE, id : todo.id, func : todoDone})}>Done</button>
+							</div>
+							: null}
+						</styled.TodoItem>
+					))}
+			</styled.TodoBox>
+		</styled.Todo>
+	)
+}
+
+export default Todo;

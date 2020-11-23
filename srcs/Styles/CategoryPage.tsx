@@ -19,7 +19,7 @@ export const TodoDiv = styled(Basic.Horizontal)`
 	float : left;
 	width : 100%;	
 	
-	margin-bottom : 3rem;
+	margin-bottom : 7rem;
 
 	justify-content : space-around;
 `
@@ -27,17 +27,14 @@ export const TodoDiv = styled(Basic.Horizontal)`
 export const Todo = styled.div`
 	flex-direction : column;
 
-	width : 15rem;
+	width : 18rem;
 	font-family : 'Black Han Sans', sans-serif;
 	font-size : 2rem;
 `
 
 export const TodoBox = styled.div`
-	border : 2px solid black;
-
 	width : (100% - 1rem);
-	height : 10rem;
-	overflow-y : scroll;
+	height : 100%;
 	overflow-x : hidden;
 
 	padding : 0.5rem;
@@ -45,6 +42,10 @@ export const TodoBox = styled.div`
 
 	font-family : 'Nanum Gothic', sans-serif;
 	font-size : 1rem;
+
+	border : 0.2px solid #999;
+	border-radius : 0.3rem;
+	box-shadow: 2px 2px 3px #999;
 `
 
 export const Arrow = styled.div`

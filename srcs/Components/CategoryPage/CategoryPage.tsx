@@ -1,16 +1,19 @@
 import * as React from 'react'
-import { category } from '../Modules/Category'
-import { record } from '../Modules/Record'
-import { todo } from '../Modules/Todo'
-import { Visible } from '../Types'
+import { category } from '../../Modules/Category'
+import { record } from '../../Modules/Record'
+import { todo } from '../../Modules/Todo'
+import { Visible } from '../../Types'
 
-import EditModal from './Modal/EditModal'
-import AddModal from './Modal/AddModal'
-import DelModal from './Modal/DelModal'
-import DoneModal from './Modal/DoneModal'
+import EditModal from '../Modal/EditModal'
+import AddModal from '../Modal/AddModal'
+import DelModal from '../Modal/DelModal'
+import DoneModal from '../Modal/DoneModal'
 
-import { Head, MenuBar } from './'
-import * as styled from '../Styles/CategoryPage'
+import { Head, MenuBar } from '..'
+
+import Todo from './Todo'
+
+import * as styled from '../../Styles/CategoryPage'
 
 type props = {
 	catId : number,
@@ -53,43 +56,26 @@ function Component
 					setAdd({visible : Visible.ADD, func : todoAdd, catId : catId})
 				}}} />
 			<styled.TodoDiv>
-				<styled.Todo>Todo
-				<styled.TodoBox>
-					{todoList.filter(todo => todo.state === false).map((todo, i) => (
-						<styled.TodoItem key={i}>
-							<p onClick={() => {
-								setEdit({visible : Visible.EDIT, id : todo.id, func : todoEdit})
-							}}>{todo.name}</p> 
-							<div>
-								<button onClick={() => setDel({visible : Visible.DEL, id : todo.id, func : todoDel})}>Del</button>
-								<button onClick={() => setDone({visible : Visible.DONE, id : todo.id, func : todoDone})}>Done</button>
-							</div>
-						</styled.TodoItem>
-					))}
-				</styled.TodoBox>
-				</styled.Todo>
+				<Todo kind="Todo" todos={todoList}
+					func={{setEdit, setDel, setDone}}
+					todoFunc={{todoEdit, todoDel, todoDone}}/>
 
 				<styled.Arrow />
-
-				<styled.Todo>Done
-				<styled.TodoBox>
-					{todoList.filter(todo => todo.state).map((todo, i) => (
-						<styled.TodoItem key={i}>
-							<p onClick={() => setEdit({visible : Visible.EDIT, id : todo.id, func : todoEdit})}>{todo.name}</p> 
-						</styled.TodoItem>
-					))}
-				</styled.TodoBox>
-				</styled.Todo>
+				<Todo kind="Done" todos={todoList}
+					func={{setEdit, setDel, setDone}}
+					todoFunc={{todoEdit, todoDel, todoDone}}/>
+				
 			</styled.TodoDiv>
 			
 			<MenuBar menu="Records" button={{ name : "Add", onClick : () => setAdd({visible : Visible.RECORD_ADD, func : recordAdd, catId : catId})}} />
 			<styled.RecordDiv>
 				{recordList.map((rec, i) => (
-					<styled.Link to={`/Record/${name}/${rec.id}`}>
-						<styled.RecordItem>
-							<styled.RecrodName>{rec.name}</styled.RecrodName><styled.Date>{rec.date}</styled.Date>
-						</styled.RecordItem>
-					</styled.Link>
+					<styled.RecordItem>
+						<styled.Link to={`/Record/${name}/${rec.id}`}>
+							<styled.RecrodName>{rec.name}</styled.RecrodName>
+						</styled.Link>
+						<styled.Date>{rec.date}</styled.Date>
+					</styled.RecordItem>	
 				))}
 			</styled.RecordDiv>
 
