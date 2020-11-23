@@ -1,11 +1,11 @@
 import * as React from 'react'
-import { category } from '../Modules/Category'
-import { todo } from '../Modules/Todo'
-import { Visible } from '../Types' 
-import AddModal from './Modal/AddModal'
+import { category } from '../../Modules/Category'
+import { todo } from '../../Modules/Todo'
+import { Visible } from '../../Types' 
+import AddModal from '../Modal/AddModal'
 
-import * as styled from '../Styles/MainPage'
-import { Head, MenuBar } from './'
+import * as styled from '../../Styles/MainPage'
+import { Head, MenuBar } from '..'
 
 type props = {
 	categories : category[];
@@ -20,7 +20,7 @@ function Component ({ categories, todos, categoryAdd } : props ) {
 		<styled.Div>
 			<Head title="My Records" />
 			<MenuBar menu="categories" 
-				button={{ name : "Add", onClick : () => setAdd({visible : Visible.ADD, func : categoryAdd})}}/>
+				button={{ name : "+ New", onClick : () => setAdd({visible : Visible.ADD, func : categoryAdd})}}/>
 			{categories.map((cat, i) => {
 				const todoList = todos.filter(todo => todo.catId === cat.id);
 				return (

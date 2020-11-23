@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import * as styled from '../../Styles/Basic'
+import * as styled from '../../Styles/MenuBar'
 
 type props = {
 	menu : string,

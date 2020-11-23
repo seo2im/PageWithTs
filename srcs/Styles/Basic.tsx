@@ -37,12 +37,6 @@ export const Div = styled.div`
 		margin : 5rem 2rem;
 	}
 `
-export const Head = styled(Horizontal)`
-	float : left;
-	width : 100%;
-	justify-content : space-between;
-	margin-bottom : 7rem;
-`
 
 export const MenuBar = styled(Horizontal)`
 	float : left;
@@ -59,20 +53,23 @@ export const MenuBar = styled(Horizontal)`
 export const Title =  styled.div`
 	font-family: 'Black Han Sans', sans-serif;
 	font-size : 5rem;
-
-	max-width : 30rem;
-	overflow : hidden;
 `
 
 export const Button = styled.button`
-	background-color : white;
+	background-color : #6DD6FA;
 	
+	color : white;
 	font-size : 1.4rem;
-	line-height : 1.4rem;
-	height : 1.5rem;
+	
+	line-height : 1.7rem;
+	height : 1.8rem;
+	padding : 0.2rem 0.5rem;
 	
 	margin-right : 2rem;
-	border-radius : 0.5rem;
+	border : none;
+	border-radius : 0.2rem;
+
+	box-shadow: 2px 2px 3px #999;
 `
 
 export const Text = styled.div`

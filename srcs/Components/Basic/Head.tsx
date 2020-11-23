@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import * as styled from '../../Styles/Basic'
+import * as styled from '../../Styles/Head'
 
 type button = {
 	name : string,
@@ -14,6 +14,8 @@ type props = {
 
 function Head ({ title, button } : props ) {
 	return (
+		<styled.HeadBackground>
+		<styled.HeadStack>
 		<styled.Head>
 			<styled.Title>{title}</styled.Title>
 			<div>
@@ -24,6 +26,8 @@ function Head ({ title, button } : props ) {
 			: null}
 			</div>
 		</styled.Head>
+		</styled.HeadStack>
+		</styled.HeadBackground>
 	)
 }
 
