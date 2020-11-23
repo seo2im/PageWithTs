@@ -5,5 +5,6 @@ export enum Visible {
 	DEL,
 	DONE,
 	RECORD_ADD,
-	RECORD_EDIT
+	RECORD_EDIT,
+	CATEGORY_DEL
 }

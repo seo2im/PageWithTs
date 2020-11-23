@@ -17,10 +17,9 @@ export const Button = styled(Basic.Button)`
 
 export const TodoDiv = styled(Basic.Horizontal)`
 	float : left;
-	width : 100%;
-
-	border-bottom : 2px solid black;
-	margin-bottom : 1.5rem;
+	width : 100%;	
+	
+	margin-bottom : 3rem;
 
 	justify-content : space-around;
 `
@@ -28,6 +27,7 @@ export const TodoDiv = styled(Basic.Horizontal)`
 export const Todo = styled.div`
 	flex-direction : column;
 
+	width : 15rem;
 	font-family : 'Black Han Sans', sans-serif;
 	font-size : 2rem;
 `
@@ -35,16 +35,30 @@ export const Todo = styled.div`
 export const TodoBox = styled.div`
 	border : 2px solid black;
 
-	width : 10rem;
-	min-height : 9rem;
-	margin : 0.5rem 1rem;
+	width : (100% - 1rem);
+	height : 10rem;
+	overflow-y : scroll;
+	overflow-x : hidden;
+
+	padding : 0.5rem;
+	margin-right : 1rem;
 
 	font-family : 'Nanum Gothic', sans-serif;
 	font-size : 1rem;
 `
 
+export const Arrow = styled.div`
+	background-color : black;
+	width : 5rem;
+	height : 5rem;
+
+	margin : 5rem 1rem;
+	clip-path : polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+`
+
 export const TodoItem = styled(Basic.Horizontal)`
-	
+	justify-content : space-between;
+	align-items : center;
 `
 
 export const RecordDiv = styled.div`

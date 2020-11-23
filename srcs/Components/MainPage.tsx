@@ -1,12 +1,11 @@
 import * as React from 'react'
-import { Link } from 'react-router-dom' 
 import { category } from '../Modules/Category'
 import { todo } from '../Modules/Todo'
 import { Visible } from '../Types' 
 import AddModal from './Modal/AddModal'
-import { useSelector } from 'react-redux'
 
 import * as styled from '../Styles/MainPage'
+import { Head, MenuBar } from './'
 
 type props = {
 	categories : category[];
@@ -19,17 +18,15 @@ function Component ({ categories, todos, categoryAdd } : props ) {
 
 	return (
 		<styled.Div>
-			<styled.Title>
-				Record of 
-				<styled.Button onClick={() => setAdd({visible : Visible.ADD, func : categoryAdd})}>Add</styled.Button>
-			</styled.Title>
+			<Head title="My Records" />
+			<MenuBar menu="categories" 
+				button={{ name : "Add", onClick : () => setAdd({visible : Visible.ADD, func : categoryAdd})}}/>
 			{categories.map((cat, i) => {
 				const todoList = todos.filter(todo => todo.catId === cat.id);
-				const { id, name } = cat;
 				return (
 					<styled.CatDiv>
-						<styled.Link to={`/Category/${id}`}>
-							<styled.Cat>{name}</styled.Cat>
+						<styled.Link to={`/Category/${cat.id}`}>
+							<styled.Cat>{cat.name}</styled.Cat>
 						</styled.Link>
 						<styled.TodoBox>
 						{todoList.map((todo, j) => (

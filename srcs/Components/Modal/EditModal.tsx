@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Visible } from '../../Types'
 
+import * as styled from '../../Styles/Modal'
 
 function Modal ({edit, setEdit}) {
 	const { visible, id, func } = edit;
@@ -11,15 +12,15 @@ function Modal ({edit, setEdit}) {
 	let content;
 
 	return (
-		<div style={{display : (visible === Visible.EDIT) || (visible ===Visible.RECORD_EDIT) ? "block" : "none",
-				backgroundColor : "rgba(0,0,0,0.9)", width : "100%", height : "100%", position : "fixed", top : 0, left : 0}}>
-			<div style={{backgroundColor : "white"}}>
-				<form>
-					<input
+		<styled.Div display={visible}>
+			<styled.Modal>
+				<styled.InputDiv>
+					<styled.Label>Edit Name</styled.Label>
+					<styled.Input
 						placeholder="name"
 						value={value}
 						onChange={e => value = e.target.value}/>
-				</form>
+				</styled.InputDiv>
 				{visible === Visible.RECORD_EDIT ?
 				<form>
 					<textarea
@@ -28,15 +29,17 @@ function Modal ({edit, setEdit}) {
 						onChange={e => content = e.target.value}/>
 				</form>
 				: null}
-				<button onClick={() => {
+				<styled.buttonDiv>
+				<styled.Button onClick={() => {
 					visible === Visible.RECORD_EDIT ?
 					func(id, value, date, content)
 					: func(id, value);
 					setEdit({visible : Visible.NONE, id : -1, func : () => {}});
 				}
-				}>OK!</button>
-			</div>
-		</div>
+				}>OK!</styled.Button>
+				</styled.buttonDiv>
+			</styled.Modal>
+		</styled.Div>
 	)	
 }
 

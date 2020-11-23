@@ -1,4 +1,6 @@
 import * as React from 'react'
+
+import * as styled from '../../Styles/Modal'
 import { Visible } from '../../Types'
 
 function Modal ({add, setAdd}) {
@@ -6,18 +8,16 @@ function Modal ({add, setAdd}) {
 	let value;
 	let content;
 
-	console.log(catId);
-
 	return (
-		<div style={{display : (visible === Visible.ADD) || (visible === Visible.RECORD_ADD) ? "block" : "none",
-				backgroundColor : "rgba(0,0,0,0.9)", width : "100%", height : "100%", position : "fixed", top : 0, left : 0}}>
-			<div style={{backgroundColor : "white"}}>
-				<form>
-					<input
-						placeholder="name"
+		<styled.Div display={visible}>
+			<styled.Modal>
+				<styled.InputDiv>
+					<styled.Label>Add Content</styled.Label>
+					<styled.Input
+						placeholder="Add"
 						value={value}
 						onChange={e => value = e.target.value}/>
-				</form>
+				</styled.InputDiv>
 				{visible === Visible.RECORD_ADD ?
 				<form>
 					<textarea
@@ -26,15 +26,16 @@ function Modal ({add, setAdd}) {
 						onChange={e => content = e.target.value}/>
 				</form>
 				: null}
-				<button onClick={() => {
-					catId !== undefined ?
-					(visible === Visible.RECORD_ADD ? func(catId, value, content) : func(catId, value)) : 
-					func(value);
-					setAdd({ visible : Visible.NONE, func : () => {}, catId : -1})
-				}
-				}>OK!</button>
-			</div>
-		</div>
+				<styled.buttonDiv>
+					<styled.Button onClick={() => {
+						catId !== undefined ?
+						(visible === Visible.RECORD_ADD ? func(catId, value, content) : func(catId, value)) : 
+						func(value);
+						setAdd({ visible : Visible.NONE, func : () => {}, catId : -1})
+					}}>OK!</styled.Button>
+				</styled.buttonDiv>
+			</styled.Modal>
+		</styled.Div>
 	)	
 }
 

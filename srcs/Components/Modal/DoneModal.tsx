@@ -1,22 +1,25 @@
 import * as React from 'react'
-import { Link } from 'react-router-dom'
 
+import * as styled from '../../Styles/Modal'
 import { Visible } from '../../Types'
 
 function Modal ({done, setDone}) {
 	const { visible, id, func } = done;
 
 	return (
-		<div style={{display : visible === Visible.DONE ? "block" : "none",
-				backgroundColor : "rgba(0,0,0,0.9)", width : "100%", height : "100%", position : "fixed", top : 0, left : 0}}>
-			<div style={{backgroundColor : "white"}}>
-				<button onClick={() => {
+		<styled.Div display={visible}>
+			<styled.Modal>
+				<styled.ModalText>TODO를 완료상태로 바꾸시겠습니까?</styled.ModalText>
+				<styled.buttonDiv>
+				<styled.Button onClick={() => {
 					func(id);
 					setDone({visible : Visible.NONE, id : -1, func : () => {}})
-				}}>YES</button>
-				<button onClick={() => setDone({visible : Visible.NONE, id : -1, func : () => {}})}>NO</button>
-			</div>
-		</div>
+				}}>YES</styled.Button>
+				<styled.Button onClick={() => setDone({visible : Visible.NONE, id : -1, func : () => {}})
+				}>NO</styled.Button>
+				</styled.buttonDiv>
+			</styled.Modal>
+		</styled.Div>
 	)	
 }
 

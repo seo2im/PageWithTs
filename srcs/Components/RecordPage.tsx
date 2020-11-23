@@ -5,6 +5,7 @@ import { record } from '../Modules/Record'
 import EditModal from './Modal/EditModal'
 import DelModal from './Modal/DelModal' 
 
+import { Head } from './'
 import * as styled from '../Styles/RecordPage'
 
 type props = {
@@ -23,12 +24,16 @@ function Component ({catName, recId, records, recordEdit, recordDel, history } :
 
 	return (
 		<styled.Div>
-			<styled.Title>Record of {catName}</styled.Title>
+			<Head title={`Record of ${catName}`} />
 			<styled.Head>
-				<styled.RecordTitle>{record.name}</styled.RecordTitle>
-				<styled.Date>{record.date}</styled.Date>
-				<styled.Button onClick={() => setEdit({visible : Visible.RECORD_EDIT, id : record.id, func : recordEdit})}>Edit</styled.Button>
-				<styled.Button onClick={() => setDel({visible : Visible.DEL, id : record.id, func : recordDel, back : true})}>Del</styled.Button>
+				<styled.Wrap w="25rem">
+					<styled.RecordTitle>{record.name}</styled.RecordTitle>
+					<styled.Date>{record.date}</styled.Date>
+				</styled.Wrap>
+				<styled.Wrap w="8rem">
+					<styled.Button onClick={() => setEdit({visible : Visible.RECORD_EDIT, id : record.id, func : recordEdit})}>Edit</styled.Button>
+					<styled.Button onClick={() => setDel({visible : Visible.DEL, id : record.id, func : recordDel, back : `/Category/${record.catId}`})}>Del</styled.Button>
+				</styled.Wrap>
 			</styled.Head>
 
 			<styled.Content>{record.content}</styled.Content>
