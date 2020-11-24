@@ -7,6 +7,8 @@ export const HeadBackground = styled.div`
 	float : left;
 	width : 100%;
 	margin-bottom : 2rem;
+
+	position : relative;
 `
 
 export const HeadStack = styled.div`
@@ -30,4 +32,10 @@ export const Title = styled(Basic.Title)`
 	overflow : hidden;
 `
 
+export const ButtonDiv = styled.div`
+	width : 15rem;
+	position : absolute;
+	top : 20%;
+	left : 75%;
+`
 export const Button = styled(Basic.Button)``

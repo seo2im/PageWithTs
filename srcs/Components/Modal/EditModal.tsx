@@ -4,12 +4,22 @@ import { Visible } from '../../Types'
 import * as styled from '../../Styles/Modal'
 
 function Modal ({edit, setEdit}) {
-	const { visible, id, func } = edit;
-	let value;
+	const { visible, id, func, data } = edit;
+	const { name, content } = data;
+
+	const [ value, setValue ] = React.useState<string>("");
+	const [ newContent, setNewContent ] = React.useState<string>("");
+
+	React.useEffect(() => {
+		name !== undefined ? setValue(name) : 0;
+	}, [name])
+
+	React.useEffect(() => {
+		content !== undefined ? setNewContent(content) : 0;
+	}, [content])
 
 	const D = new Date();
 	const date = `${D.getFullYear()/100}.${D.getMonth()}.${D.getDate()}`;
-	let content;
 
 	return (
 		<styled.Div display={visible}>
@@ -19,24 +29,28 @@ function Modal ({edit, setEdit}) {
 					<styled.Input
 						placeholder="name"
 						value={value}
-						onChange={e => value = e.target.value}/>
+						onChange={e => setValue(e.target.value)}/>
 				</styled.InputDiv>
-				{visible === Visible.RECORD_EDIT ?
-				<form>
-					<textarea
+				<styled.InputDiv>
+					{visible === Visible.RECORD_EDIT ?
+					<styled.Content
 						placeholder="content"
-						value={content}
-						onChange={e => content = e.target.value}/>
-				</form>
-				: null}
+						value={newContent}
+						onChange={e => setNewContent(e.target.value)}/>
+					: null}
+				</styled.InputDiv>
 				<styled.buttonDiv>
 				<styled.Button onClick={() => {
+					if (value === "")
+						return ;
 					visible === Visible.RECORD_EDIT ?
-					func(id, value, date, content)
+					func(id, value, date, newContent)
 					: func(id, value);
-					setEdit({visible : Visible.NONE, id : -1, func : () => {}});
+					setEdit({visible : Visible.NONE, id : -1, func : () => {}, data : {}});
 				}
 				}>OK!</styled.Button>
+				<styled.Button onClick={() => setEdit({visible : Visible.NONE, id : -1, func : () => {}, data : {}})
+				}>NO</styled.Button>
 				</styled.buttonDiv>
 			</styled.Modal>
 		</styled.Div>

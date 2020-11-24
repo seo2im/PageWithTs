@@ -35,7 +35,7 @@ function Component
  categoryEdit, categoryDel, todoAdd, todoEdit, todoDone, todoDel, recordAdd} : props)
 {
 	const [ add, setAdd ] = React.useState<{}>({visible : Visible.NONE, func : () => {}, catId : -1})
-	const [ edit, setEdit ] = React.useState<{}>({visible : Visible.NONE, id : -1, func : () => {}})
+	const [ edit, setEdit ] = React.useState<{}>({visible : Visible.NONE, id : -1, func : () => {}, data : {}})
 	const [ del, setDel ] = React.useState<{}>({visible : Visible.NONE, id : -1, func : () => {}})
 	const [ done, setDone ] = React.useState<{}>({visible : Visible.NONE, id : -1, func : () => {}})
 	const { name } = categories.find(cat => cat.id == catId);
@@ -46,7 +46,7 @@ function Component
 		<styled.Div>
 			<Head title={`Records of ${name}`} 
 				button={[{ name : "Edit", onClick : () => {
-						setEdit({visible : Visible.EDIT, id : catId, func : categoryEdit})
+						setEdit({visible : Visible.EDIT, id : catId, func : categoryEdit, data : { name : name }})
 					}}, { name : "Del", onClick : () => {
 						setDel({visible : Visible.DEL, id : catId, func : categoryDel, back : '/'})
 					}}]}/>
@@ -59,12 +59,10 @@ function Component
 				<Todo kind="Todo" todos={todoList}
 					func={{setEdit, setDel, setDone}}
 					todoFunc={{todoEdit, todoDel, todoDone}}/>
-
 				<styled.Arrow />
 				<Todo kind="Done" todos={todoList}
 					func={{setEdit, setDel, setDone}}
 					todoFunc={{todoEdit, todoDel, todoDone}}/>
-				
 			</styled.TodoDiv>
 			
 			<MenuBar menu="Records" button={{ name : "Add", onClick : () => setAdd({visible : Visible.RECORD_ADD, func : recordAdd, catId : catId})}} />

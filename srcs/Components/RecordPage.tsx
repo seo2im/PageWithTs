@@ -19,8 +19,8 @@ type props = {
 
 function Component ({catName, recId, records, recordEdit, recordDel, history } : props) {
 	const record = records.find(rec => rec.id === recId)
-	const [ edit, setEdit ] = React.useState<{}>({});
-	const [ del, setDel ] = React.useState<{}>({});
+	const [ edit, setEdit ] = React.useState<{}>({visible : Visible.NONE, id : -1, func : () => {}, data : {}});
+	const [ del, setDel ] = React.useState<{}>({visible : Visible.NONE, id : -1, func : () => {}});
 
 	return (
 		<styled.Div>
@@ -31,7 +31,7 @@ function Component ({catName, recId, records, recordEdit, recordDel, history } :
 					<styled.Date>{record.date}</styled.Date>
 				</styled.Wrap>
 				<styled.Wrap w="8rem">
-					<styled.Button onClick={() => setEdit({visible : Visible.RECORD_EDIT, id : record.id, func : recordEdit})}>Edit</styled.Button>
+					<styled.Button onClick={() => setEdit({visible : Visible.RECORD_EDIT, id : record.id, func : recordEdit, data : { name : record.name, content : record.content}})}>Edit</styled.Button>
 					<styled.Button onClick={() => setDel({visible : Visible.DEL, id : record.id, func : recordDel, back : `/Category/${record.catId}`})}>Del</styled.Button>
 				</styled.Wrap>
 			</styled.Head>

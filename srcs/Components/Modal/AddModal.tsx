@@ -18,14 +18,15 @@ function Modal ({add, setAdd}) {
 						value={value}
 						onChange={e => setValue(e.target.value)}/>
 				</styled.InputDiv>
+				<styled.InputDiv>
 				{visible === Visible.RECORD_ADD ?
-				<form>
-					<textarea
-						placeholder="content"
-						value={content}
-						onChange={e => setValue(e.target.value)}/>
-				</form>
+				
+				<styled.Content
+					placeholder="content"
+					value={content}
+					onChange={e => setContent(e.target.value)}/>
 				: null}
+				</styled.InputDiv>
 				<styled.buttonDiv>
 					<styled.Button onClick={() => {
 						if (value === "")
@@ -37,6 +38,8 @@ function Modal ({add, setAdd}) {
 						setContent("");
 						setAdd({ visible : Visible.NONE, func : () => {}, catId : -1})
 					}}>OK!</styled.Button>
+					<styled.Button onClick={() => setAdd({visible : Visible.NONE, id : -1, func : () => {}})
+				}>NO</styled.Button>
 				</styled.buttonDiv>
 			</styled.Modal>
 		</styled.Div>

@@ -62,6 +62,15 @@ export const TodoItem = styled(Basic.Horizontal)`
 	align-items : center;
 `
 
+export const TodoButton = styled(Basic.Button)`
+	margin : 0.1rem;
+	font-size : 0.8rem;
+
+	padding : 0 0.2rem;
+	height : 1rem;
+	line-height : 1rem;
+`
+
 export const RecordDiv = styled.div`
 	float : left;
 	width : 100%;
@@ -82,6 +91,7 @@ export const RecrodName = styled(Basic.Title)`
 
 export const Date = styled(Basic.Text)`
 	font-size : 0.8rem;
+	margin-right : 1.5rem;
 `
 
 export const Link = styled(Basic.Link)`

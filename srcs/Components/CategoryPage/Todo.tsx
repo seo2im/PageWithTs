@@ -13,12 +13,12 @@ function Todo ({ kind, todos, func, todoFunc}) {
 				{todos.filter(todo => todo.state === false).map((todo, i) => (
 						<styled.TodoItem key={i}>
 							<p onClick={() => {
-								setEdit({visible : Visible.EDIT, id : todo.id, func : todoEdit})
+								setEdit({visible : Visible.EDIT, id : todo.id, func : todoEdit, data : { name : todo.name }})
 							}}>{todo.name}</p> 
 							{kind === "Todo" ? 
 							<div>
-								<button onClick={() => setDel({visible : Visible.DEL, id : todo.id, func : todoDel})}>Del</button>
-								<button onClick={() => setDone({visible : Visible.DONE, id : todo.id, func : todoDone})}>Done</button>
+								<styled.TodoButton onClick={() => setDone({visible : Visible.DONE, id : todo.id, func : todoDone})}>Done</styled.TodoButton>
+								<styled.TodoButton onClick={() => setDel({visible : Visible.DEL, id : todo.id, func : todoDel})}>X</styled.TodoButton>
 							</div>
 							: null}
 						</styled.TodoItem>

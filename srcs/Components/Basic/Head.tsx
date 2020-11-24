@@ -18,15 +18,16 @@ function Head ({ title, button } : props ) {
 		<styled.HeadStack>
 		<styled.Head>
 			<styled.Title>{title}</styled.Title>
-			<div>
+			
+		</styled.Head>
+		</styled.HeadStack>
+		<styled.ButtonDiv>
 			{button ?
 			button.map(e => (
 				<styled.Button onClick={e.onClick}>{e.name}</styled.Button>
 			))
 			: null}
-			</div>
-		</styled.Head>
-		</styled.HeadStack>
+		</styled.ButtonDiv>
 		</styled.HeadBackground>
 	)
 }
